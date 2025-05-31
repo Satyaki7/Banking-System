@@ -1,27 +1,31 @@
-import java.util.HashSet;
+import java.util.*;
+import java.util.HashMap;
 import java.util.Random;
-import java.util.Set;
-
 public class Customer {
-    public final String customerId;
-    private static Set<String> customerDatabase;
+    public String customerId;
+    private static Map<String,String[]> customerDatabase;
+    private static String tempList[];
     private StringBuffer customerName;
 
     static {
-        customerDatabase= new HashSet<String>();
+        customerDatabase= new HashMap<>();
     }
 
     public Customer() {
+        this.customerId = "";
+        this.customerName = new StringBuffer();
+        tempList = new String[5];
+    }
+    public void createCustomerId(){
         this.customerId = finalCustomerId();
     }
-
     private static String finalCustomerId(){
         final int max = 999999;
         final int min = 100000;
         Random random = new Random();
         while (true){
             String proposedId = String.valueOf((Math.abs((int)(random.nextInt() * (max - min)) + min)));
-            if (!customerDatabase.contains(proposedId)){
+            if (!customerDatabase.containsKey(proposedId)){
                 storeCustomerId(proposedId);
                 return proposedId;
             }
@@ -31,14 +35,21 @@ public class Customer {
 
     public  static void storeCustomerId(String proposedId){
         System.out.println(proposedId);
-        customerDatabase.add(proposedId);
+
+        customerDatabase.put(proposedId,tempList);
     }
 
-    public String getId(){
-        return this.customerId;
+    public void getId(){
+        System.out.println("New Customer created with id : " + this.customerId);
+
     }
 
-    public void setName(String customerName) {
-        this.customerName = new StringBuffer(customerName);
+    public void setName(String customer_name) {
+        this.customerName.append(customer_name);
+        tempList[0] = String.valueOf(this.customerName);
+    }
+
+    public static void getCustomerById(String customerid){
+        System.out.println(Arrays.toString(customerDatabase.get(customerid)));
     }
 }

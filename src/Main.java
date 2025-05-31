@@ -16,6 +16,9 @@ public class Main {
                     createCustomer();
                     break;
                 case 2:
+                    getDetails();
+                    break;
+                case 3:
                     running = false;
                 default:
                     continue;
@@ -26,9 +29,16 @@ public class Main {
     public static void createCustomer() {
         Scanner sc = new Scanner(System.in);
         Customer customer = new Customer();
-        System.out.println("Enter the name of the customer: ");
+        System.out.print("Enter the name of the customer: ");
         customer.setName(sc.nextLine());
-        System.out.println("New Customer created with id : " + customer.getId());
+        customer.createCustomerId();
+        customer.getId();
+    }
+    public static void getDetails(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Customer Id to see details: ");
+        String customerid = sc.nextLine();
+        Customer.getCustomerById(customerid);
     }
 
 }
