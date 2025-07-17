@@ -1,0 +1,45 @@
+.login_outer_main {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, auto);
+  background: rgba(255, 255, 255, 0.21);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  gap: 10px;
+  width: 400px;
+  padding: 10px;
+  margin: auto; /* center if parent allows */
+}
+
+.input_divs {
+  grid-column: span 2;
+  background: transparent;
+  padding: 0px;
+  text-align: center;
+}
+
+.input_boxes {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border-color: transparent;
+  background-color: #a8e8fccb;
+}
+
+#choosing_link {
+  text-decoration: none;
+  color: brown;
+  size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.log_button {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #028ae4;
+  border-color: transparent;
+  color: whitesmoke;
+}

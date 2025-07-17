@@ -1,0 +1,24 @@
+.login_page {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+}
+
+.login_page_inside{
+  height: 80%;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffffef;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.294);
+  border-radius: 20px;
+  display: grid;
+  grid-row: 1fr;
+  grid-column: (2,auto);
+  column-gap: 30px;
+  padding: 18px;
+}
