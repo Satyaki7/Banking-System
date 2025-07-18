@@ -1,8 +1,7 @@
 
 import LoginContainer from "../components/Login&SignUp/loginContainer";
 import SideImage from "../components/Login&SignUp/sideImage";
-import SignUpContainer from "../components/Login&SignUp/signupContainer";
-import '../index.css';
+import './pages.css';
 
 const Login: React.FC = () => {
   
