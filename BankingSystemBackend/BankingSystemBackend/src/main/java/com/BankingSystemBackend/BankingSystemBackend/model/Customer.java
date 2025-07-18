@@ -4,6 +4,9 @@ import com.BankingSystemBackend.BankingSystemBackend.DAO.CustomerDAO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,32 +20,26 @@ import java.util.Set;
 @Scope("prototype")
 @Entity
 public class Customer {
+    @Getter
     @Id
     private String id;
+    @Setter
+    @Getter
     private String name;
+    @Setter
+    @Getter
     private String password;
+    @Getter
     @Autowired
     @OneToMany(mappedBy = "customer")
-    private Set<Account> accounts = new HashSet<>();;
+    private Set<Account> accounts;
+    @Getter
+    @Setter
+    private long pocketBalance;
 
     public Customer() {
         this.id = generateCustomerId();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.accounts = new HashSet<>();
     }
 
     private @NotNull String generateCustomerId(){
@@ -65,16 +62,8 @@ public class Customer {
         return id.toString();
     }
 
-    public Set<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    public String getId() {
-        return id;
+    public void setAccounts(Account account) {
+        this.accounts.add(account);
     }
 }
 

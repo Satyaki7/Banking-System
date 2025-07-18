@@ -3,6 +3,8 @@ package com.BankingSystemBackend.BankingSystemBackend.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import java.util.Random;
 public class Account {
     @Id
     private String accountId;
+    @Getter
+    @Setter
     private long balance;
     @Autowired
     @ManyToOne
