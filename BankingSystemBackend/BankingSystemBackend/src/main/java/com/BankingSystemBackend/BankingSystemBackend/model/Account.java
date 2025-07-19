@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-@Component
-@Scope("prototype")
 @Entity
 public class Account {
     @Id
@@ -20,6 +18,8 @@ public class Account {
     @Getter
     @Setter
     private long balance;
+    @Getter
+    @Setter
     @Autowired
     @ManyToOne
     private Customer customer;

@@ -6,7 +6,8 @@ import com.BankingSystemBackend.BankingSystemBackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -22,5 +23,11 @@ public class AccountController {
     public String helloWorld(){
         System.out.println("working");
         return "hello world";
+    }
+    @PostMapping("/createAccount")
+    public boolean createAccount(@RequestBody Map<String, String> body){
+        String customerId = body.get("customerId");
+        Optional<Customer> customer = customerService.getCustomer(customerId);
+        return service.createAccount(customer.orElse(null));
     }
 }

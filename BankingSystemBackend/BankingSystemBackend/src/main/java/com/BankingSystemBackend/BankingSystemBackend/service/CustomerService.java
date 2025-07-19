@@ -9,25 +9,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
 
     @Autowired
-    private CustomerDAO dao;
+    private CustomerDAO customerDAO;
     @Autowired
     private AccountService accountService;
 
     public List<Customer> findAll() {
-        return dao.findAll();
+        return customerDAO.findAll();
     }
 
     public boolean createCustomer(Customer customer) {
-        if ((dao.findByName(customer.getName())).isEmpty()){
+        if ((customerDAO.findByName(customer.getName())).isEmpty()){
             customer.setPocketBalance(1000);
-            Account ac = accountService.createAccount();
-            customer.setAccounts(ac);
-            dao.save(customer);
+            customerDAO.save(customer);
             return true;
         }else return false;
     }
@@ -39,8 +38,8 @@ public class CustomerService {
         * 2 if wrong password
         * */
         List<String> a = new ArrayList<>();
-        if (!dao.findByName(customer.getName()).isEmpty()){
-            Customer fetchedCustomer =  (dao.findByName(customer.getName())).getFirst();
+        if (!customerDAO.findByName(customer.getName()).isEmpty()){
+            Customer fetchedCustomer =  (customerDAO.findByName(customer.getName())).getFirst();
             if(fetchedCustomer.getPassword().equals(customer.getPassword())){
                 a.add("1");
                 a.add(fetchedCustomer.getId());
@@ -53,5 +52,9 @@ public class CustomerService {
             a.add("0");
             return a;
         }
+    }
+
+    public Optional<Customer> getCustomer(String id) {
+        return customerDAO.findById(id);
     }
 }
