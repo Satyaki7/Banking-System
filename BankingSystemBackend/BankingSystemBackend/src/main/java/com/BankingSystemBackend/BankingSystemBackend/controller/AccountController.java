@@ -1,11 +1,13 @@
 package com.BankingSystemBackend.BankingSystemBackend.controller;
 
+import com.BankingSystemBackend.BankingSystemBackend.model.Account;
 import com.BankingSystemBackend.BankingSystemBackend.model.Customer;
 import com.BankingSystemBackend.BankingSystemBackend.service.AccountService;
 import com.BankingSystemBackend.BankingSystemBackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class AccountController {
 
     @Autowired
-    private AccountService service;
+    private AccountService accountService;
     @Autowired
     private CustomerService customerService;
 
@@ -28,6 +30,11 @@ public class AccountController {
     public boolean createAccount(@RequestBody Map<String, String> body){
         String customerId = body.get("customerId");
         Optional<Customer> customer = customerService.getCustomer(customerId);
-        return service.createAccount(customer.orElse(null));
+        return accountService.createAccount(customer.orElse(null));
+    }
+
+    @PostMapping("/updateBalance")
+    public String updateBalance(@RequestBody Map<String,String> body){
+            return accountService.updateAccountBalance(body);
     }
 }

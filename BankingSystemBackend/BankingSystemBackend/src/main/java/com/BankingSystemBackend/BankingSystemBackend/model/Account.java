@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -23,6 +26,8 @@ public class Account {
     @Autowired
     @ManyToOne
     private Customer customer;
+    @Getter
+    private Set<String> transactions = new HashSet<>();
 
     public Account(){
         accountId = generateAccountId();
@@ -46,5 +51,10 @@ public class Account {
         }
 
         return id.toString();
+    }
+
+    public void setTransactions(String s, LocalDate now) {
+        this.transactions.add(s+" "+now);
+
     }
 }

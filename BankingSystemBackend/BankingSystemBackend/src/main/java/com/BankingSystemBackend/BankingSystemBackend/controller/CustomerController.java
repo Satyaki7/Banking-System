@@ -26,7 +26,7 @@ public class CustomerController {
         return service.findAll();
     }
 
-    @PostMapping("/createAccount")
+    @PostMapping("/createCustomer")
     public boolean creatingCustomer(@RequestBody Customer customer){
         System.out.println("Service triggered.");
         return service.createCustomer(customer);
