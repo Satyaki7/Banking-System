@@ -7,9 +7,7 @@ import com.BankingSystemBackend.BankingSystemBackend.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CustomerService {
@@ -56,5 +54,17 @@ public class CustomerService {
 
     public Optional<Customer> getCustomer(String id) {
         return customerDAO.findById(id);
+    }
+
+    public Set<Account> getAllAccounts(Map<String, String> body) {
+        String customerId = body.get("customerId");
+        Optional<Customer> customer = getCustomer(customerId);
+        if(customer.isPresent()){
+            Customer customerVar = customer.get();
+            return customerVar.getAccounts();
+        }else{
+            return new HashSet<>();
+        }
+
     }
 }

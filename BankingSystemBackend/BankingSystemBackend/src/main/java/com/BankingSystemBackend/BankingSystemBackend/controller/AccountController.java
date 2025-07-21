@@ -7,9 +7,9 @@ import com.BankingSystemBackend.BankingSystemBackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -36,5 +36,10 @@ public class AccountController {
     @PostMapping("/updateBalance")
     public String updateBalance(@RequestBody Map<String,String> body){
             return accountService.updateAccountBalance(body);
+    }
+
+    @GetMapping("/getAll")
+    public Set<Account> getAllAccounts(@RequestBody Map<String, String> body){
+        return customerService.getAllAccounts(body);
     }
 }

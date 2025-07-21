@@ -30,7 +30,6 @@ public class Customer {
     @Getter
     private String password;
     @Getter
-    @Autowired
     @OneToMany(mappedBy = "customer")
     private Set<Account> accounts;
     @Getter

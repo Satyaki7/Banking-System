@@ -1,7 +1,9 @@
 package com.BankingSystemBackend.BankingSystemBackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,8 @@ public class Account {
     @Setter
     @Autowired
     @ManyToOne
+    @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
     @Getter
     private Set<String> transactions = new HashSet<>();

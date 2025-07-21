@@ -20,7 +20,7 @@ function SignUpContainer() {
     if (name.trim() != "" && password.trim() != "") {
       try {
         const response = await fetch(
-          "http://localhost:8080/customer/createAccount",
+          "http://localhost:8080/customer/createCustomer",
           {
             method: "POST",
             headers: {
