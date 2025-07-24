@@ -31,7 +31,7 @@ public class CustomerController {
     }
 
     @PostMapping("/createCustomer")
-    public boolean creatingCustomer(@RequestBody Customer customer){
+    public Customer creatingCustomer(@RequestBody Customer customer){
         System.out.println("Service triggered.");
         return service.createCustomer(customer);
     }
@@ -40,5 +40,11 @@ public class CustomerController {
     public List<String> loginCustomer(@RequestBody Customer customer){
         System.out.println("Service triggered");
         return service.findCustomer(customer);
+    }
+    
+    @PostMapping("/CustomerDetails")
+    public Optional<Customer> customerDetails(@RequestBody Map<String, String> body){
+        System.out.println("Service triggered");
+        return service.getCustomer(body.get("customerId"));
     }
 }

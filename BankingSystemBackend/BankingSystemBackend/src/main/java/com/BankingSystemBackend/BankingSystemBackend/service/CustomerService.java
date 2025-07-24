@@ -21,12 +21,12 @@ public class CustomerService {
         return customerDAO.findAll();
     }
 
-    public boolean createCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer) {
         if ((customerDAO.findByName(customer.getName())).isEmpty()){
             customer.setPocketBalance(1000);
             customerDAO.save(customer);
-            return true;
-        }else return false;
+            return customer;
+        }else return null;
     }
 
     public List<String> findCustomer(Customer customer) {
@@ -63,7 +63,7 @@ public class CustomerService {
             Customer customerVar = customer.get();
             return customerVar.getAccounts();
         }else{
-            return new HashSet<>();
+            return null;
         }
 
     }

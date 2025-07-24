@@ -13,6 +13,12 @@ function SignUpContainer() {
   const [emptyUsername, setUsernameStatus] = useState(false);
   const [emptyPassword, setPasswordStatus] = useState(false);
 
+  const saveUserIDToLocalStorage = (id) => {
+    if (id) {
+      localStorage.setItem("customerId", JSON.stringify(id));
+    }
+  };
+
   // Handle form submission
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault(); // prevent page reload
@@ -35,8 +41,9 @@ function SignUpContainer() {
 
         const result = await response.json();
 
-        if (response.ok && result == true) {
+        if (response.ok && result != null) {
           // SignUp successful
+          saveUserIDToLocalStorage(result.id);
           navigate("/dashboard");
         } else {
           // SignUp failed

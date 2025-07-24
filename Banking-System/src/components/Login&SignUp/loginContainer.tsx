@@ -9,10 +9,15 @@ function SignUpContainer() {
   // State variables to hold form input
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [userID, setUserId] = useState("");
   const [emptyUsername, setUsernameStatus] = useState(false);
   const [emptyPassword, setPasswordStatus] = useState(false);
   const [userNotFound, setUserNotFoundStatus] = useState(false);
+
+  const saveUserIDToLocalStorage = (id) => {
+    if (id) {
+      localStorage.setItem("customerId", JSON.stringify(id));
+    }
+  };
 
   // Handle form submission
   const handleLogin = async (e: React.FormEvent) => {
@@ -20,7 +25,7 @@ function SignUpContainer() {
     setUsernameStatus(false);
     setPasswordStatus(false);
     setUserNotFoundStatus(false);
-    
+
     if (name.trim() != "" && password.trim() != "") {
       try {
         const response = await fetch("http://localhost:8080/customer/Login", {
@@ -36,7 +41,7 @@ function SignUpContainer() {
         const result = await response.json();
         if (response.ok && result[0] == "1") {
           // Login successful
-          setUserId(result[1]);
+          saveUserIDToLocalStorage(result[1]);
           navigate("/dashboard");
         } else if (result[0] == "0") {
           // Login failed
@@ -98,7 +103,7 @@ function SignUpContainer() {
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: "10px", gridRow: 3 }}>
             <input
-              type="text"
+              type="password"
               className="input_boxes"
               placeholder="Password"
               value={password}
