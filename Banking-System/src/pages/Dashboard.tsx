@@ -1,5 +1,6 @@
 "use client";
 
+import TransactionTable from "@/components/DashboardComponents/TransactionTable";
 import DropdownMenu from "../components/DashboardComponents/DropdownMenu";
 import MoneyBox from "../components/DashboardComponents/MoneyBox";
 import SideNavBar from "../components/SidebarComponents/SideNavBar";
@@ -98,12 +99,9 @@ const Dashboard: React.FC = () => {
                   }
                 />
                 <DropdownMenu
-                  options={customerData.accounts.map((_, index) => ({
-                    label: `Account ${index + 1}`,
-                    value: index,
-                  }))}
-                  onSelect={(selectedIndex) => setAccountNumber(selectedIndex)}
-                  label={`Account ${accountNumber + 1}`}
+                  accounts={customerData.accounts}
+                  onSelect={setAccountNumber}
+                  selectedIndex={accountNumber}
                 />
               </>
             ) : (
@@ -124,7 +122,9 @@ const Dashboard: React.FC = () => {
 
         <div className="dashboard-div-2">div2</div>
         <div className="dashboard-div-3">div3</div>
-        <div className="dashboard-div-4">div4</div>
+        <div className="dashboard-div-4">
+          <TransactionTable />
+        </div>
       </div>
     </div>
   );

@@ -1,74 +1,44 @@
-import React, { useState } from "react";
-
-interface DropdownOption {
-  label: string;
-  value: number;
-}
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import React from "react";
 
 interface DropdownMenuProps {
-  label: string;
-  options: DropdownOption[];
-  onSelect: (value: number) => void;
+  accounts: { balance: number }[];
+  onSelect: (accountIndex: number) => void;
+  selectedIndex: number;
 }
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
-  label,
-  options,
+  accounts,
   onSelect,
+  selectedIndex,
 }) => {
-  const [open, setOpen] = useState(false);
-  const [selectedLabel, setSelectedLabel] = useState(label);
-
-  const handleSelect = (option: DropdownOption) => {
-    setSelectedLabel(option.label);
-    setOpen(false);
-    onSelect(option.value); // sending index or ID
-  };
-
   return (
-    <div style={{ gridColumn: 2 }}>
-      <div
-        className="dropdown-container"
-        style={{ position: "relative", display: "inline-block" }}
+    <div className="">
+      <Select
+        value={String(selectedIndex)} // convert number to string
+        onValueChange={(value) => onSelect(Number(value))} // convert string to number
       >
-        <button
-          onClick={() => setOpen(!open)}
-          style={{
-            padding: "8px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            backgroundColor: "transparent",
-          }}
-        >
-          {selectedLabel} ▼
-        </button>
-        {open && (
-          <ul
-            style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              listStyle: "none",
-              margin: 0,
-              padding: "4px",
-              border: "1px dotted #ccc",
-              borderRadius: "4px",
-              background: "transparent",
-              zIndex: 100,
-            }}
-          >
-            {options.map((option) => (
-              <li
-                key={option.value}
-                onClick={() => handleSelect(option)}
-                style={{ padding: "6px", cursor: "pointer" }}
-              >
-                {option.label}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+        <SelectTrigger className="">
+          <SelectValue placeholder="Select Account" />
+        </SelectTrigger>
+        <SelectContent className="bg-transparent">
+          {accounts.map((_, index) => (
+            <SelectItem
+              key={index}
+              value={String(index)}
+              className="bg-transparent hover:bg-amber-50"
+            >
+              Account {index + 1}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 };

@@ -106,6 +106,7 @@
   grid-row: 2/4;
   max-height: 100%;
   max-width: 100%;
+  padding: 16px;
 }
 
 .sidebar {
