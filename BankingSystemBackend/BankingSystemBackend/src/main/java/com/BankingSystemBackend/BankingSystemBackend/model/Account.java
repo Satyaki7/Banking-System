@@ -1,10 +1,7 @@
 package com.BankingSystemBackend.BankingSystemBackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +16,7 @@ import java.util.Set;
 @Entity
 public class Account {
     @Id
+    @Getter
     private String accountId;
     @Getter
     @Setter
@@ -31,7 +29,9 @@ public class Account {
     @JsonIgnore
     private Customer customer;
     @Getter
-    private Set<String> transactions = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "account_transactions", joinColumns = @JoinColumn(name = "account_id"))
+    private Set<Transaction> transactions = new HashSet<>();
 
     public Account(){
         accountId = generateAccountId();
@@ -57,8 +57,13 @@ public class Account {
         return id.toString();
     }
 
-    public void setTransactions(String s, LocalDate now) {
-        this.transactions.add(s+" "+now);
+    public void setTransactions(String from,Long amount,String type,String account) {
+        Transaction transaction = new Transaction();
+        transaction.setType(type);
+        transaction.setSource(from);
+        transaction.setAmount(amount);
+        transaction.setAccount(account);
+        this.transactions.add(transaction);
 
     }
 }

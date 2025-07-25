@@ -3,11 +3,13 @@ package com.BankingSystemBackend.BankingSystemBackend.service;
 import com.BankingSystemBackend.BankingSystemBackend.DAO.AccountDAO;
 import com.BankingSystemBackend.BankingSystemBackend.model.Account;
 import com.BankingSystemBackend.BankingSystemBackend.model.Customer;
+import com.BankingSystemBackend.BankingSystemBackend.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class AccountService {
@@ -34,7 +36,7 @@ public class AccountService {
         if (transactionType.equals("Add")){
             long lastAmount = account.getBalance();
             account.setBalance(lastAmount + Long.parseLong(amount));
-            account.setTransactions(String.valueOf(account.getBalance()), LocalDate.now());
+            account.setTransactions("Pocket",Long.parseLong(amount),"credited");
             accountDAO.save(account);
             return "Transaction successful";
         }else if(transactionType.equals("Deduct")) {
@@ -43,9 +45,15 @@ public class AccountService {
                 return "Transaction declined due to low funds.";
             } else {
                 account.setBalance(lastAmount - Long.parseLong(amount));
-                account.setTransactions(String.valueOf(account.getBalance()), LocalDate.now());
+                account.setTransactions("Pocket",Long.parseLong(amount),"debited",account.getAccountId());
+                accountDAO.save(account);
                 return "Transaction successful";
             }
         }else return "Unexpected error";
+    }
+
+    public Set<Transaction> getTransactions(String accountID) {
+        Account ac = accountDAO.getReferenceById(accountID);
+        return ac.getTransactions();
     }
 }

@@ -8,29 +8,43 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-function TransactionTable() {
+type Transaction = {
+  source: string;
+  amount: number;
+  type: string;
+  date: string;
+  account: string; // ISO string like "2025-07-25"
+};
+
+type Props = {
+  transactions: Transaction[];
+};
+
+function TransactionTable({ transactions }: Props) {
   return (
-    <>
-      <Table className="bg-amber-100">
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+    <Table className="bg-amber-100">
+      <TableCaption>A list of your recent transactions.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Account</TableHead>
+          <TableHead className="w-[120px]">Date</TableHead>
+          <TableHead>Source</TableHead>
+          <TableHead>Amount</TableHead>
+          <TableHead className="text-center">Type</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {transactions.map((tx, index) => (
+          <TableRow key={index}>
+            <TableCell>{tx.account}</TableCell>
+            <TableCell>{new Date(tx.date).toLocaleDateString()}</TableCell>
+            <TableCell>{tx.source}</TableCell>
+            <TableCell>{tx.amount}</TableCell>
+            <TableCell className="text-center">{tx.type}</TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 

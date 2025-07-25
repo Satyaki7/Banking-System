@@ -72,6 +72,10 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  // Assuming `customerData` is available in the parent (like Dashboard)
+  const transactions =
+    customerData?.accounts?.flatMap((acc: any) => acc.transactions) || [];
+
   return (
     <div className="dashboard-body">
       <SideNavBar />
@@ -121,10 +125,10 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="dashboard-div-2">div2</div>
-        <div className="dashboard-div-3">div3</div>
-        <div className="dashboard-div-4">
-          <TransactionTable />
+        <div className="dashboard-div-3">
+          <TransactionTable transactions={transactions} />
         </div>
+        <div className="dashboard-div-4"></div>
       </div>
     </div>
   );

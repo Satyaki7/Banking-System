@@ -2,6 +2,7 @@ package com.BankingSystemBackend.BankingSystemBackend.controller;
 
 import com.BankingSystemBackend.BankingSystemBackend.model.Account;
 import com.BankingSystemBackend.BankingSystemBackend.model.Customer;
+import com.BankingSystemBackend.BankingSystemBackend.model.Transaction;
 import com.BankingSystemBackend.BankingSystemBackend.service.AccountService;
 import com.BankingSystemBackend.BankingSystemBackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,11 @@ public class AccountController {
     @GetMapping("/getAll")
     public Set<Account> getAllAccounts(@RequestBody Map<String, String> body){
         return customerService.getAllAccounts(body);
+    }
+
+    @PostMapping("/transactions")
+    public Set<Transaction> getAllTransactions(@RequestBody Map<String,String> body){
+        String id = body.get("accountId");
+        return accountService.getTransactions(id);
     }
 }

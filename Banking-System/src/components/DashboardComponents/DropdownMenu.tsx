@@ -24,7 +24,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         value={String(selectedIndex)} // convert number to string
         onValueChange={(value) => onSelect(Number(value))} // convert string to number
       >
-        <SelectTrigger className="">
+        <SelectTrigger
+          className="border-amber-950"
+          style={{ borderRadius: "16px" }}
+        >
           <SelectValue placeholder="Select Account" />
         </SelectTrigger>
         <SelectContent className="bg-transparent">
