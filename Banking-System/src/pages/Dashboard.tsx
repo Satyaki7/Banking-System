@@ -3,9 +3,10 @@
 import TransactionTable from "@/components/DashboardComponents/TransactionTable";
 import DropdownMenu from "../components/DashboardComponents/DropdownMenu";
 import MoneyBox from "../components/DashboardComponents/MoneyBox";
-import SideNavBar from "../components/SidebarComponents/SideNavBar";
 import "./pages.css";
 import { useEffect, useState } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Navbar from "@/components/Navbar/Navbar";
 
 const Dashboard: React.FC = () => {
   const [storedId, setStoredId] = useState("");
@@ -78,7 +79,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard-body">
-      <SideNavBar />
+      <div style={{ gridRow: 1, height: "100%", width: "100%" }}>
+        <Navbar />
+      </div>
       <div className="dashboard-Overview">
         <div className="dashboard-div-1">
           {/* 🪙 Pocket Balance */}
@@ -125,8 +128,17 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="dashboard-div-2">div2</div>
-        <div className="dashboard-div-3">
-          <TransactionTable transactions={transactions} />
+        <div
+          className="dashboard-div-3"
+          style={{
+            background: "#333533",
+            color: "whitesmoke",
+            borderRadius: "16px",
+          }}
+        >
+          <ScrollArea className="w-[100%] h-[100%]">
+            <TransactionTable transactions={transactions} />
+          </ScrollArea>
         </div>
         <div className="dashboard-div-4"></div>
       </div>

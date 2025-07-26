@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -22,18 +21,22 @@ type Props = {
 
 function TransactionTable({ transactions }: Props) {
   return (
-    <Table className="bg-amber-100">
-      <TableCaption>A list of your recent transactions.</TableCaption>
+    <Table
+      className="rounded-2xl">
       <TableHeader>
-        <TableRow>
-          <TableHead>Account</TableHead>
-          <TableHead className="w-[120px]">Date</TableHead>
-          <TableHead>Source</TableHead>
-          <TableHead>Amount</TableHead>
-          <TableHead className="text-center">Type</TableHead>
+        <TableRow className="text-lg">
+          <TableHead style={{ color: "#FCF8C5" }}>Account</TableHead>
+          <TableHead className="w-[120px]" style={{ color: "#FCF8C5" }}>
+            Date
+          </TableHead>
+          <TableHead style={{ color: "#FCF8C5" }}>Source</TableHead>
+          <TableHead style={{ color: "#FCF8C5" }}>Amount</TableHead>
+          <TableHead className="text-center" style={{ color: "#FCF8C5" }}>
+            Type
+          </TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="text-base">
         {transactions.map((tx, index) => (
           <TableRow key={index}>
             <TableCell>{tx.account}</TableCell>

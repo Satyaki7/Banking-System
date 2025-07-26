@@ -25,8 +25,8 @@
 
 .dashboard-body {
   display: grid;
-  grid-template-columns: 16% 84%;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 1;
+  grid-template-rows: 4% 96%;
   background-color: #e0e0e0;
   padding: 0px;
   margin: 0;
@@ -35,6 +35,8 @@
 }
 .dashboard-Overview {
   display: grid;
+  grid-column: 1;
+  grid-row: 2;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   background-color: #f5f5f5;
@@ -100,7 +102,7 @@
   grid-row: 2/4;
   max-height: 100%;
   max-width: 100%;
-  padding: 16px;
+  padding: 8px;
 }
 .dashboard-div-4 {
   grid-column: 3/4;
