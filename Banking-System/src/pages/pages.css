@@ -25,8 +25,8 @@
 
 .dashboard-body {
   display: grid;
-  grid-template-columns: 1;
-  grid-template-rows: 4% 96%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   background-color: #e0e0e0;
   padding: 0px;
   margin: 0;

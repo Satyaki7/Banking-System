@@ -6,7 +6,7 @@ import MoneyBox from "../components/DashboardComponents/MoneyBox";
 import "./pages.css";
 import { useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Navbar from "@/components/Navbar/Navbar";
+import TransactionTab from "@/components/Transactions/transactionTab";
 
 const Dashboard: React.FC = () => {
   const [storedId, setStoredId] = useState("");
@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
 
       if (response.ok) {
         alert("Account created successfully!");
-        await fetchCustomerData(); // refresh to show new account
+        await fetchCustomerData();
       } else {
         alert("Failed to create account.");
       }
@@ -72,16 +72,11 @@ const Dashboard: React.FC = () => {
       console.error("Error creating account:", err);
     }
   };
-
-  // Assuming `customerData` is available in the parent (like Dashboard)
   const transactions =
     customerData?.accounts?.flatMap((acc: any) => acc.transactions) || [];
 
   return (
     <div className="dashboard-body">
-      <div style={{ gridRow: 1, height: "100%", width: "100%" }}>
-        <Navbar />
-      </div>
       <div className="dashboard-Overview">
         <div className="dashboard-div-1">
           {/* 🪙 Pocket Balance */}
@@ -128,19 +123,22 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="dashboard-div-2">div2</div>
+        <div className="dashboard-div-3">
+          <TransactionTab />
+        </div>
         <div
-          className="dashboard-div-3"
+          className="dashboard-div-4"
           style={{
             background: "#333533",
             color: "whitesmoke",
             borderRadius: "16px",
+            margin: "8px",
           }}
         >
           <ScrollArea className="w-[100%] h-[100%]">
             <TransactionTable transactions={transactions} />
           </ScrollArea>
         </div>
-        <div className="dashboard-div-4"></div>
       </div>
     </div>
   );
